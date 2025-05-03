@@ -1,0 +1,32 @@
+# Ignorera node_modules
+node_modules/
+
+# Ignorera loggfiler
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ignorera miljövariabler
+.env
+
+# Ignorera operativsystemspecifika filer
+.DS_Store
+Thumbs.db
+
+# Ignorera byggfiler
+dist/
+build/
+
+# Ignorera IDE-specifika filer
+.vscode/
+.idea/
+*.swp
+
+# Ignorera testtäckningsrapporter
+coverage/
+
+# Ignorera temporära filer
+*.tmp
+*.temp
