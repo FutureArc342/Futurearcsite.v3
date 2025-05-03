@@ -1,15 +1,21 @@
-// Js för att cta knappen ska scrolla till futures sectionen direkt
-function scrollToSection(sectionId) {
-    const section = document.getElementById(sectionId);
-    if (section) {
-        console.log("Section found, scrolling to it.");
-        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    } else {
-        console.error("Section with ID '" + sectionId + "' not found.");
-    }
-}
+// Före:
+// const form = document.querySelector("form");
 
+// Efter:
+const form = document.getElementById("contactForm");
 
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const message = document.getElementById("message").value;
 
-
-
+  const res = await fetch("/api/contact", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name, email, message }),
+  });
+  const data = await res.json();
+  alert(data.message || data.error);
+  if (res.ok) form.reset();
+});
