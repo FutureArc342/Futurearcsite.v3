@@ -1,358 +1,491 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 <section id="future-section">
-<div class="futures-section">
+  <div class="futures-section">
     <div class="futures-container">
-        <div class="future-box">
-            <i class="fa-solid fa-bell icon"></i>
-            <h3>Nyheter</h3>
-            <span class="coming-soon">Lanseras snart</span>
-            <p>Håll dig uppdaterad med de senaste nyheterna och uppdateringarna från vår community.</p>
-            <button onclick="openModal('news-modal')" class="learn-more">Läs mer</button>
-        </div>
-
-        <div class="future-box">
-            <i class="fa-solid fa-desktop icon"></i>
-            <h3>Tutorials</h3>
-            <span class="coming-soon">Lanseras snart</span>
-            <p>Utforska våra handledningar och lär dig nya färdigheter inom programmering.</p>
-            <button onclick="openModal('tutorials-modal')" class="learn-more">Läs mer</button>
-        </div>
-
-        <div class="future-box">
-            <i class="fa-solid fa-comments icon"></i>
-            <h3>Discord Community</h3>
-            <span class="coming-soon">Lanseras snart</span>
-            <p>Gå med i vår Discord community för diskussioner och samarbete.</p>
-            <button onclick="openModal('discord-modal')" class="learn-more">Läs mer</button>
-        </div>
-
-        <div class="future-box">
-            <i class="fa-solid fa-share-nodes icon"></i>
-            <h3>Sociala Medier</h3>
-            <p>Följ oss på våra sociala medier för att hålla dig uppdaterad om det senaste.</p>
-            <button onclick="openModal('social-modal')" class="learn-more">Läs mer</button>
-        </div>
+      <div class="future-box">
+        <i class="fa-solid fa-bell icon"></i>
+        <h3>Nyheter</h3>
+        <span class="coming-soon">Lanseras snart</span>
+        <p>Håll dig uppdaterad med de senaste nyheterna och uppdateringarna från vår community.</p>
+        <button onclick="openModal('news-modal')" class="learn-more">Läs mer</button>
+      </div>
+      <div class="future-box">
+        <i class="fa-solid fa-desktop icon"></i>
+        <h3>Tutorials</h3>
+        <span class="coming-soon">Lanseras snart</span>
+        <p>Utforska våra handledningar och lär dig nya färdigheter inom programmering.</p>
+        <button onclick="openModal('tutorials-modal')" class="learn-more">Läs mer</button>
+      </div>
+      <div class="future-box">
+        <i class="fa-solid fa-comments icon"></i>
+        <h3>Discord Community</h3>
+        <span class="coming-soon">Lanseras snart</span>
+        <p>Gå med i vår Discord community för diskussioner och samarbete.</p>
+        <button onclick="openModal('discord-modal')" class="learn-more">Läs mer</button>
+      </div>
+      <div class="future-box">
+        <i class="fa-solid fa-share-nodes icon"></i>
+        <h3>Sociala Medier</h3>
+        <p>Följ oss på våra sociala medier för att hålla dig uppdaterad om det senaste.</p>
+        <button onclick="openModal('social-modal')" class="learn-more">Läs mer</button>
+      </div>
     </div>
-</div>
+  </div>
 </section>
 
 <!-- Modals -->
 <div id="news-modal" class="modal">
-    <div class="modal-content">
-        <span class="close-button" onclick="closeModal('news-modal')">&times;</span>
-        <h2>Nyheter <span class="coming-soon">Lanseras snart</span></h2>
-        <img src="assets/images/newsbanner.png" alt="Nyheter bild">
-        <hr>
-        <p>
-            Vi på <strong>Future Arc</strong> arbetar just nu med att bygga upp en kraftfull nyhetssektion där du kommer att hitta de senaste och viktigaste uppdateringarna inom tech-världen. 
-            Vår vision är att ge dig snabba, relevanta och djupgående nyheter om programmering, AI, startups, cybersäkerhet och mycket mer – allt på ett och samma ställe.
-        </p>
-        <p>
-            <strong>Vad kan du förvänta dig?</strong><br>
-            ✅ Dagliga nyheter om den senaste tekniken<br>
-            ✅ Analyser och insikter från experter<br>
-            ✅ Sammanfattningar av stora tech-händelser<br>
-            ✅ Community-drivna artiklar och diskussioner
-        </p>
-        <p>
-            Vi jobbar hårt för att lansera denna sektion så snart som möjligt. Håll utkik och <strong>stay tuned</strong> – Future Arc’s nyhetsflöde är snart här! 🚀
-        </p>
-    </div>
+  <div class="modal-content">
+    <button class="close-button" onclick="closeModal('news-modal')" aria-label="Stäng">&times;</button>
+    <img src="assets/images/newsbanner.png" alt="Nyheter bild" class="modal-img" loading="lazy">
+    <h2>Nyheter</h2>
+    <hr>
+    <p>
+      Vi på <strong>Future Arc</strong> arbetar just nu med att bygga upp en kraftfull nyhetssektion där du kommer att hitta de senaste och viktigaste uppdateringarna inom tech-världen. 
+      Vår vision är att ge dig snabba, relevanta och djupgående nyheter om programmering, AI, startups, cybersäkerhet och mycket mer – allt på ett och samma ställe.
+    </p>
+    <ul>
+      <li>✅ Dagliga nyheter om den senaste tekniken</li>
+      <li>✅ Analyser och insikter från experter</li>
+      <li>✅ Sammanfattningar av stora tech-händelser</li>
+      <li>✅ Community-drivna artiklar och diskussioner</li>
+    </ul>
+    <p>
+      Vi jobbar hårt för att lansera denna sektion så snart som möjligt. Håll utkik och <strong>stay tuned</strong> – Future Arc’s nyhetsflöde är snart här! 🚀
+    </p>
+  </div>
 </div>
 
 <div id="tutorials-modal" class="modal">
-    <div class="modal-content">
-        <span class="close-button" onclick="closeModal('tutorials-modal')">&times;</span>
-        <h2>Tutorials <span class="coming-soon">Lanseras snart</span></h2>
-        <img src="assets/images/tutorialsbanner.png" alt="Tutorials bild">
-        <hr>
-        <p>Vi på Future Arc jobbar för fullt med att ta fram en komplett sektion för programmeringskurser som kommer att ta din utvecklingsresa till nästa nivå. Vårt mål är att ge dig högkvalitativa kurser, video tutorials och interaktiva quiz – allt för att du ska kunna lära dig och utvecklas som programmerare, oavsett om du är nybörjare eller erfaren.</p>
-        <p><strong>Vad kan du förvänta dig?</strong></p>
-        <ul>
-            <li>✅ Djupgående kurser i populära programmeringsspråk som Python, JavaScript, C++, Java, och mera.</li>
-            <li>✅ Interaktiva quiz för att testa dina kunskaper och förbättra din förståelse</li>
-            <li>✅ Instruktionsvideor från erfarna utvecklare och experter inom tech</li>
-            <li>✅ Community-baserade diskussioner där du kan få feedback och nätverka med andra utvecklare</li>
-        </ul>
-        <p>Vi rekryterar för närvarande erfarna programmerare och tech-experter som kan bidra med sina kunskaper och skapa en lärorik och inspirerande upplevelse för alla våra medlemmar.</p>
-        <p><strong>Håll ögonen öppna</strong> vi lanserar snart en plattform där du kan förbättra dina färdigheter och växa inom programmering! 🚀</p>
-    </div>
+  <div class="modal-content">
+    <button class="close-button" onclick="closeModal('tutorials-modal')" aria-label="Stäng">&times;</button>
+    <img src="assets/images/tutorialsbanner.png" alt="Tutorials bild" class="modal-img" loading="lazy">
+    <h2>Tutorials</h2>
+    <hr>
+    <p>
+      Vi på Future Arc jobbar för fullt med att ta fram en komplett sektion för programmeringskurser som kommer att ta din utvecklingsresa till nästa nivå. Vårt mål är att ge dig högkvalitativa kurser, video tutorials och interaktiva quiz – allt för att du ska kunna lära dig och utvecklas som programmerare, oavsett om du är nybörjare eller erfaren.
+    </p>
+    <ul>
+      <li>✅ Djupgående kurser i populära programmeringsspråk som Python, JavaScript, C++, Java, och mera.</li>
+      <li>✅ Interaktiva quiz för att testa dina kunskaper och förbättra din förståelse</li>
+      <li>✅ Instruktionsvideor från erfarna utvecklare och experter inom tech</li>
+      <li>✅ Community-baserade diskussioner där du kan få feedback och nätverka med andra utvecklare</li>
+    </ul>
+    <p>
+      Vi rekryterar för närvarande erfarna programmerare och tech-experter som kan bidra med sina kunskaper och skapa en lärorik och inspirerande upplevelse för alla våra medlemmar.
+    </p>
+    <p>
+      <strong>Håll ögonen öppna</strong> vi lanserar snart en plattform där du kan förbättra dina färdigheter och växa inom programmering! 🚀
+    </p>
+  </div>
 </div>
 
 <div id="discord-modal" class="modal">
-    <div class="modal-content">
-        <span class="close-button" onclick="closeModal('discord-modal')">&times;</span>
-        <h2>Discord Community <span class="coming-soon">Lanseras snart</span></h2>
-        <img src="assets/images/discordbanner.png" alt="Discord bild">
-        <hr>
-        <p class="intro-text">FutureArc skapades med en tydlig vision att både lära oss själva och dela med oss av kunskap. Vårt mål är att bygga ett tillgängligt och engagerande community för alla tech-intresserade i Sverige.</p>
-
-        <p>Vi är väl medvetna om att vi som arbetar inom tech tillbringar en stor del av vår tid framför skärmarna. Därför ville vi skapa en plats där vi kan stötta varandra, dela erfarenheter, samarbeta och nätverka – allt på ett sätt som smidigt integreras i vår digitala vardag.</p>
-            
-        <p>För att möjliggöra detta satsar vi helhjärtat på att utveckla vår Discord-community, där medlemmar kan diskutera, få hjälp och knyta värdefulla kontakter. I framtiden vill vi också utöka plattformen med funktioner som gör det enklare att hitta jobbmöjligheter, projekt och samarbeten direkt via vårt community.</p>
-
-        <p>Vi på Future Arc arbetar för att skapa en engagerande och värdefull plats för alla tech-intresserade, och vår Discord-community kommer att bli hjärtat i detta. Vår vision är att skapa en öppen, stödjande och samarbetsinriktad miljö där du kan nätverka, dela erfarenheter och få hjälp från andra utvecklare och tech-experter.</p>
-        
-        <p><strong>Vad kan du förvänta dig?</strong></p>
-        <ul>
-            <li>✅ Smidiga kanaler för diskussioner om programmering, AI, cybersäkerhet och mycket mer</li>
-            <li>✅ En plats att ställa frågor, få feedback och dela med dig av dina erfarenheter</li>
-            <li>✅ Regelbundna evenemang och live-diskussioner med experter och utvecklare</li>
-            <li>✅ Möjligheter att nätverka och hitta projekt- och jobbmöjligheter inom tech</li>
-        </ul>
-
-        <p>Vi rekryterar också erfarna community-moderatorer och tech-experter som kan hjälpa till att driva diskussioner och skapa en inspirerande och välkomnande atmosfär för alla medlemmar.</p>
-
-        <p><strong>Håll ögonen öppna och vår Discord-community är snart här, och vi ser fram emot att bygga den tillsammans med dig! 🚀</strong></p>
-    </div>
+  <div class="modal-content">
+    <button class="close-button" onclick="closeModal('discord-modal')" aria-label="Stäng">&times;</button>
+    <img src="assets/images/discordbanner.png" alt="Discord bild" class="modal-img" loading="lazy">
+    <h2>Discord Community</h2>
+    <hr>
+    <p class="intro-text">
+      FutureArc skapades med en tydlig vision att både lära oss själva och dela med oss av kunskap. Vårt mål är att bygga ett tillgängligt och engagerande community för alla tech-intresserade i Sverige.
+    </p>
+    <p>
+      Vi är väl medvetna om att vi som arbetar inom tech tillbringar en stor del av vår tid framför skärmarna. Därför ville vi skapa en plats där vi kan stötta varandra, dela erfarenheter, samarbeta och nätverka – allt på ett sätt som smidigt integreras i vår digitala vardag.
+    </p>
+    <p>
+      För att möjliggöra detta satsar vi helhjärtat på att utveckla vår Discord-community, där medlemmar kan diskutera, få hjälp och knyta värdefulla kontakter. I framtiden vill vi också utöka plattformen med funktioner som gör det enklare att hitta jobbmöjligheter, projekt och samarbeten direkt via vårt community.
+    </p>
+    <ul>
+      <li>✅ Smidiga kanaler för diskussioner om programmering, AI, cybersäkerhet och mycket mer</li>
+      <li>✅ En plats att ställa frågor, få feedback och dela med dig av dina erfarenheter</li>
+      <li>✅ Regelbundna evenemang och live-diskussioner med experter och utvecklare</li>
+      <li>✅ Möjligheter att nätverka och hitta projekt- och jobbmöjligheter inom tech</li>
+    </ul>
+    <p>
+      Vi rekryterar också erfarna community-moderatorer och tech-experter som kan hjälpa till att driva diskussioner och skapa en inspirerande och välkomnande atmosfär för alla medlemmar.
+    </p>
+    <p>
+      <strong>Håll ögonen öppna – vår Discord-community är snart här, och vi ser fram emot att bygga den tillsammans med dig! 🚀</strong>
+    </p>
+  </div>
 </div>
-
 
 <div id="social-modal" class="modal">
-    <div class="modal-content">
-        <span class="close-button" onclick="closeModal('social-modal')">&times;</span>
-        <h2>Sociala Medier</h2>
-        <img src="assets/images/mediabanners.png" alt="Sociala Medier bild">
-        <div class="social-media-callout">
-            <hr>
-            <p>Följ oss på våra sociala medier för att ta del av:</p>
-            <span class="down-arrow">&#x25BC;</span>
-        </div>
-        <div class="social-icons">
-            <a href="https://www.linkedin.com/company/futurearcmedia" target="_blank" class="social-link">
-                <i class="fa-brands fa-linkedin"></i>
-            </a>
-            <a href="https://www.instagram.com/futurearcmedia" target="_blank" class="social-link">
-                <i class="fa-brands fa-instagram"></i>
-            </a>
-            <a href="https://www.tiktok.com/@futurearcmedia" target="_blank" class="social-link">
-                <i class="fa-brands fa-tiktok"></i>
-            </a>
-            <a href="https://x.com/future_arcmedia" target="_blank" class="social-link">
-                <i class="fa-brands fa-x-twitter"></i>
-            </a>
-        </div>
+  <div class="modal-content">
+    <button class="close-button" onclick="closeModal('social-modal')" aria-label="Stäng">&times;</button>
+    <h2>Sociala Medier</h2>
+    <img src="assets/images/mediabanners.png" alt="Sociala Medier bild" class="modal-img" loading="lazy">
+    <div class="social-media-callout">
+      <hr>
+      <p>Följ oss på våra sociala medier för att ta del av:</p>
     </div>
+    <div class="social-icons">
+      <a href="https://www.linkedin.com/company/futurearcmedia" target="_blank" class="social-link" aria-label="LinkedIn">
+        <i class="fa-brands fa-linkedin"></i>
+      </a>
+      <a href="https://www.instagram.com/futurearcmedia" target="_blank" class="social-link" aria-label="Instagram">
+        <i class="fa-brands fa-instagram"></i>
+      </a>
+      <a href="https://www.tiktok.com/@futurearcmedia" target="_blank" class="social-link" aria-label="TikTok">
+        <i class="fa-brands fa-tiktok"></i>
+      </a>
+      <a href="https://x.com/future_arcmedia" target="_blank" class="social-link" aria-label="X (Twitter)">
+        <i class="fa-brands fa-x-twitter"></i>
+      </a>
+    </div>
+  </div>
 </div>
 
-
 <style>
+:root {
+  --primary: #f86700;
+  --primary-dark: #c94e00;
+  --bg: #18191c;
+  --modal-bg: rgba(20, 20, 20, 0.92);
+  --box-bg: #1a1b1e;
+  --text: #f3f3f3;
+  --muted: #acacac;
+  --radius: 22px;
+  --shadow: 0 12px 48px rgba(0,0,0,0.55), 0 2px 0 var(--primary);
+  --transition: 0.25s cubic-bezier(.23,1.01,.32,1);
+}
 
-    .modal {
-        display: none;
-    }
+body {
+  font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+  background: #111;
+  color: var(--text);
+}
 
-    .futures-container {
-        background: linear-gradient(90deg, #171615, #000000);
-        display: flex;
-        justify-content: center;
-        gap: 1.5rem;
-        padding: 1.5rem;
-        flex-wrap: wrap;
-        max-width: 100%;
-        margin: 0 auto;
-    }
+.futures-section {
+  padding: 2.5rem 0 2rem 0;
+  background: linear-gradient(90deg, #171615 0%, #000 100%);
+}
+
+.futures-container {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 .future-box {
-    flex: 0 1 250px; /* Öka bredden */
-    padding: 2rem 1.6rem; /* Justera padding */
-    min-height: 250px; /* Öka minsta höjden */
-    background-color: #1a1b1e;
-    border-radius: 8px;
-    text-align: left;
-    transition: transform 0.2s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    border: 2px solid #f86700;
-    box-shadow: 0 0 15px rgba(248, 103, 0, 0.3);
-    transition: all 0.3s ease;
+  flex: 0 1 270px;
+  padding: 2.2rem 1.7rem 2rem 1.7rem;
+  min-height: 270px;
+  background: var(--box-bg);
+  border-radius: var(--radius);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 2px solid var(--primary);
+  box-shadow: 0 0 18px rgba(248, 103, 0, 0.22);
+  transition: box-shadow var(--transition), border-color var(--transition), transform var(--transition);
+  position: relative;
+  overflow: hidden;
 }
 
 .future-box .icon {
-    font-size: 2rem; /* Öka ikonens storlek */
-    margin-bottom: 1.2rem; /* Justera marginalen nedanför ikonen */
-    background-color: #f86700;
-    width: 50px; /* Öka ikonens bredd */
-    height: 50px; /* Öka ikonens höjd */
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
+  font-size: 2.2rem;
+  margin-bottom: 1.3rem;
+  background: var(--primary);
+  width: 54px;
+  height: 54px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  box-shadow: 0 2px 10px rgba(248,103,0,0.13);
 }
 
 .future-box h3 {
-    color: #fff;
-    font-weight: bolder;
-    transition: color 0.3s ease;
-    margin-bottom: 0.8rem; /* Justera marginalen nedanför rubriken */
+  color: #fff;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+  letter-spacing: 0.5px;
+  font-size: 1.25rem;
+  transition: color var(--transition);
+}
+
+.coming-soon {
+  display: inline-block;
+  background: var(--primary);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 6px;
+  padding: 0.18rem 0.7rem;
+  margin-bottom: 0.7rem;
+  letter-spacing: 0.5px;
+  box-shadow: 0 1px 6px rgba(248,103,0,0.13);
 }
 
 .future-box p {
-    color: #acacac;
-    font-size: 1rem; /* Öka textstorleken */
-    font-weight: bold;
-    line-height: 1.6; /* Justera radavståndet */
-    margin: 0;
-    flex-grow: 1;
+  color: var(--muted);
+  font-size: 1.01rem;
+  font-weight: 500;
+  line-height: 1.6;
+  margin: 0;
+  flex-grow: 1;
 }
 
 .learn-more {
-    display: inline-block;
-    padding: 0.6rem 1rem; /* Justera padding */
-    margin-top: 1.2rem; /* Justera marginalen ovanför knappen */
-    background-color: #f86700;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  display: inline-block;
+  padding: 0.65rem 1.2rem;
+  margin-top: 1.3rem;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background var(--transition), box-shadow var(--transition), transform var(--transition);
+  box-shadow: 0 2px 10px rgba(248,103,0,0.13);
+  letter-spacing: 0.5px;
 }
 
-    .future-box:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 0 20px rgba(248, 103, 0, 0.5);
-        border-color: #ff8533;
-    }
+.learn-more:hover, .future-box:hover .learn-more {
+  background: var(--primary-dark);
+  box-shadow: 0 4px 18px rgba(248,103,0,0.22);
+  transform: translateY(-2px) scale(1.04);
+}
 
-    .future-box .icon {
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
-        background-color: #f86700;
-        width: 45px;
-        height: 45px;
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-    }
+.future-box:hover {
+  transform: translateY(-7px) scale(1.03);
+  box-shadow: 0 0 30px rgba(248, 103, 0, 0.35);
+  border-color: #ff8533;
+}
 
-    .futures-section .futures-container .future-box h3 {
-        color: #fff;
-        font-weight: bolder;
-        transition: color 0.3s ease; /* Lägger till en mjuk övergång för färgändring */
-    }
+.future-box:hover h3 {
+  color: var(--primary);
+  text-shadow: 0 0 10px rgba(248, 103, 0, 0.5);
+}
 
-    .futures-section .futures-container .future-box:hover h3 {
-        color: rgb(248, 103, 0); /* Ändra RGB-värdena till önskad färg */
-        transform: translateY(-5px);
-        text-shadow: 0 0 10px rgba(248, 103, 0, 0.5);
-    }
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0; top: 0;
+  width: 100vw; height: 100vh;
+  background: var(--modal-bg);
+  overflow: auto;
+  animation: fadeIn 0.3s;
+}
 
-    .future-box p {
-        color: #acacac;
-        font-size: 0.9rem;
-        font-weight: bold;
-        line-height: 1.5;
-        margin: 0;
-        flex-grow: 1;
-    }
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
 
-    .learn-more {
-        display: inline-block;
-        padding: 0.4rem 0.8rem;
-        margin-top: 1rem;
-        background-color: #f86700;
-        color: white;
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
+.modal-content {
+  background: var(--bg);
+  margin: 5vh auto;
+  border-radius: var(--radius);
+  max-width: 720px;
+  min-width: 340px;
+  box-shadow: var(--shadow);
+  padding: 3rem 2.5rem 2.5rem 2.5rem;
+  position: relative;
+  animation: slideDown 0.4s cubic-bezier(.23,1.01,.32,1);
+  color: var(--text);
+  border: 1.5px solid var(--primary);
+  transition: box-shadow 0.3s, border-color 0.3s;
+}
 
-    .modal-content .intro-text {
-        font-size: 1.2rem;
-        font-weight: 600;
-        line-height: 1.6;
-        margin-bottom: 1.5rem;
-        color: #f25c05;        
-    }
+@keyframes slideDown {
+  from { transform: translateY(-60px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
 
-    .modal-content p {
-        white-space: pre-line;
-        line-height: 1.6;
-        margin: 1rem 0;
-        font-weight: 500;
-        font-size: 1rem;
-    }
+.close-button {
+  position: absolute;
+  top: 22px;
+  right: 32px;
+  font-size: 2.2rem;
+  color: var(--primary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s, transform 0.2s;
+  z-index: 10;
+  font-weight: bold;
+  line-height: 1;
+  padding: 0 0.2em;
+  border-radius: 50%;
+}
+.close-button:hover {
+  color: #fff;
+  background: var(--primary);
+  transform: scale(1.18) rotate(90deg);
+  box-shadow: 0 0 12px var(--primary);
+}
 
-    .modal-content .bold-text {
-        font-weight: 700;
-    }
+.modal-img {
+  width: 100%;
+  max-height: 240px;
+  object-fit: cover;
+  border-radius: 14px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 18px rgba(248,103,0,0.13);
+  border: 1px solid #232325;
+}
 
-    .social-icons {
-        display: flex;
-        justify-content: center;
-        gap: 2rem;
-        margin: 2rem 0;
-    }
+.modal-content hr {
+  border: none;
+  border-top: 2px solid var(--primary);
+  margin: 1.2rem 0;
+  opacity: 0.7;
+}
 
-    .social-link {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 60px;
-        height: 60px;
-        background-color: #1a1b1e;
-        border-radius: 12px;
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        text-decoration: none;
-        transform: translateY(0);
-    }
+.modal-content h2 {
+  color: var(--primary);
+  font-weight: 800;
+  margin-bottom: 0.7rem;
+  letter-spacing: 0.5px;
+  text-align: left;
+  font-size: 2.1rem;
+}
 
-    .social-link i {
-        color: #f86700;
-        font-size: 1.8rem;
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
+.modal-content p, .modal-content ul {
+  color: #e0e0e0;
+  font-size: 1.13rem;
+  margin-bottom: 1.1rem;
+  line-height: 1.7;
+}
 
-    .social-link:hover {
-        transform: translateY(-8px);
-        background-color: #f86700;
-        box-shadow: 0 5px 15px rgba(248, 103, 0, 0.4);
-    }
+.modal-content ul {
+  padding-left: 1.2rem;
+  margin-bottom: 1.2rem;
+}
+.modal-content li {
+  margin-bottom: 0.5rem;
+  font-size: 1.08rem;
+}
 
-    .social-link:hover i {
-        color: white;
-        transform: scale(1.1);
-    }
+.modal-content strong {
+  color: #fff;
+  font-weight: 700;
+}
 
-    .social-media-callout p {
-        text-align: center;
-        font-size: 1.5rem;
-        color: #f86700;
-        font-weight: bold;
-        margin-bottom: 10px;
-    }
+.modal-content .intro-text {
+  font-size: 1.18rem;
+  font-weight: 600;
+  line-height: 1.6;
+  margin-bottom: 1.2rem;
+  color: var(--primary);        
+}
 
-    .down-arrow {
-        display: block;
-        text-align: center;
-        font-size: 2rem;
-        color: #f86700;
-    }
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 1.5rem 0 0.5rem 0;
+}
+.social-link {
+  width: 58px;
+  height: 58px;
+  background: #232325;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.25s, transform 0.25s;
+  box-shadow: 0 2px 12px rgba(248,103,0,0.13);
+}
+.social-link i {
+  font-size: 2rem;
+  color: var(--primary);
+  transition: color 0.25s, transform 0.25s;
+}
+.social-link:hover {
+  background: var(--primary);
+  transform: translateY(-5px) scale(1.10);
+}
+.social-link:hover i {
+  color: #fff;
+  transform: scale(1.13);
+}
 
+.social-media-callout p {
+  text-align: center;
+  font-size: 1.25rem;
+  color: var(--primary);
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 900px) {
+  .futures-container {
+    gap: 1.2rem;
+  }
+  .future-box {
+    flex: 1 1 320px;
+    min-width: 260px;
+  }
+  .modal-content {
+    max-width: 96vw;
+    padding: 2rem 1rem 1.5rem 1rem;
+  }
+}
+@media (max-width: 600px) {
+  .futures-container {
+    flex-direction: column;
+    gap: 1.2rem;
+    padding: 0.5rem;
+  }
+  .future-box {
+    min-width: unset;
+    padding: 1.2rem 0.7rem 1.2rem 0.7rem;
+  }
+  .modal-content {
+    max-width: 99vw;
+    min-width: unset;
+    padding: 1.2rem 0.5rem 1.5rem 0.5rem;
+  }
+  .modal-img {
+    max-height: 120px;
+  }
+  .close-button {
+    top: 10px;
+    right: 12px;
+    font-size: 1.5rem;
+  }
+}
 </style>
 
 <script>
-    // Definiera funktionerna i global scope
-    window.openModal = function(modalId) {
-        document.getElementById(modalId).style.display = "block";
-        document.body.style.overflow = "hidden";
-    }
+window.openModal = function(modalId) {
+  const modal = document.getElementById(modalId);
+  modal.style.display = "block";
+  setTimeout(() => { modal.style.opacity = 1; }, 10);
+  document.body.style.overflow = "hidden";
+}
 
-    window.closeModal = function(modalId) {
-        document.getElementById(modalId).style.display = "none";
-        document.body.style.overflow = "auto";
-    }
+window.closeModal = function(modalId) {
+  const modal = document.getElementById(modalId);
+  modal.style.opacity = 0;
+  setTimeout(() => {
+    modal.style.display = "none";
+    document.body.style.overflow = "auto";
+  }, 250);
+}
 
-    // Stäng modal när man klickar utanför
-    window.onclick = function(event) {
-        if (event.target.classList.contains('modal')) {
-            event.target.style.display = "none";
-            document.body.style.overflow = "auto";
-        }
-    }
+window.onclick = function(event) {
+  if (event.target.classList && event.target.classList.contains('modal')) {
+    event.target.style.opacity = 0;
+    setTimeout(() => {
+      event.target.style.display = "none";
+      document.body.style.overflow = "auto";
+    }, 250);
+  }
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.modal').forEach(m => m.style.opacity = 0);
+});
 </script>

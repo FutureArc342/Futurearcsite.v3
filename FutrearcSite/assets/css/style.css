@@ -194,19 +194,8 @@ nav ul li a[href="#"]:active {
     font-size: 0.9rem;
     font-weight: bold;
     text-transform: uppercase;
-    box-shadow: 0 0 15px rgba(248, 103, 0, 0.5);
     border: 1px solid rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(5px);
-    animation: glow 2s ease-in-out infinite alternate;
-}
-
-@keyframes glow {
-    from {
-        box-shadow: 0 0 10px rgba(248, 103, 0, 0.5);
-    }
-    to {
-        box-shadow: 0 0 20px rgba(248, 103, 0, 0.8);
-    }
 }
 
 /* Make it responsive */
@@ -252,28 +241,28 @@ nav ul li a[href="#"]:active {
     top: 20%;
     right: 6%;
     font-size: 3rem;
-    animation-delay: 0.5s;
+    animation-delay: 0s;
 }
 
 .icon-3 {
     bottom: 30%;
     left: 14%;
     font-size: 2.5rem;
-    animation-delay: 1s;
+    animation-delay:0s;
 }
 
 .icon-4 {
     bottom: 45%;
     right: 15%;
     font-size: 2rem;
-    animation-delay: 1.5s;
+    animation-delay: 0s;
 }
 
 .icon-5 {
     top: 35%;
     left: 8%;
     font-size: 2.8rem;
-    animation-delay: 0.7s;
+    animation-delay: 0s;
     animation: floatReverse 4s ease-in-out infinite;
 }
 
@@ -281,7 +270,7 @@ nav ul li a[href="#"]:active {
     bottom: 30%;
     right: 8%;
     font-size: 2.2rem;
-    animation-delay: 1.2s;
+    animation-delay: 0s;
     animation: floatDiagonal 5s ease-in-out infinite;
 }
 
@@ -289,7 +278,7 @@ nav ul li a[href="#"]:active {
     top: 40%;
     left: 25%;
     font-size: 2.4rem;
-    animation-delay: 0.3s;
+    animation-delay: 0s;
     animation: floatCircle 6s linear infinite;
 }
 
