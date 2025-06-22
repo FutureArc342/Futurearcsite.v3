@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 require('dotenv').config();
+console.log("🛠 Server.js startar...");
 
 const nodemailer = require('nodemailer');
 const transporter = nodemailer.createTransport({
@@ -11,6 +12,13 @@ const transporter = nodemailer.createTransport({
   auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS
+  }
+});
+transporter.verify((error, success) => {
+  if (error) {
+    console.error("❌ SMTP-konfigurationsfel:", error);
+  } else {
+    console.log("📬 SMTP-anslutning klar");
   }
 });
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL;

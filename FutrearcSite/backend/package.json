@@ -24,7 +24,8 @@
     "dunder-proto": "^1.0.1",
     "ecdsa-sig-formatter": "^1.0.11",
     "express": "^4.21.2",
-    "mongoose": "^8.13.0"
+    "mongoose": "^8.13.0",
+    "sparse-bitfield": "^3.0.3"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
