@@ -29,9 +29,9 @@
             <p>Hör av dig och låt oss veta hur vi kan hjälpa.</p>
 
             <form id="contact-form">
-                <input type="text" name="name" placeholder="Ditt namn" required />
-                <input type="email" name="email" placeholder="Din e-post" required />
-                <textarea name="message" placeholder="Meddelande" required></textarea>
+                <input type="text" id="name" name="name" placeholder="Ditt namn" required />
+                <input type="email" id="email" name="email" placeholder="Din e-post" required />
+                <textarea id="message" name="message" placeholder="Meddelande" required></textarea>
                 <button type="submit">Skicka</button>
               </form>
               
@@ -540,7 +540,7 @@ form button:hover::after {
 <script>
 // Patch the fetch call in contact.js if it exists here for demonstration, otherwise ensure in assets/js/contact.js
 document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('contactForm');
+    const form = document.getElementById('contact-form');
     if (form) {
         form.addEventListener('submit', function(e) {
             e.preventDefault();
