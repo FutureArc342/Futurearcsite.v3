@@ -1,351 +1,303 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="pageTitle">Artikel</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Iceland&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        /* Base styles for body and typography */
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8f9fa; /* Lighter background */
-            margin: 0;
-            line-height: 1.7; /* Enhanced line height for body text */
-            color: #343a40; /* Slightly darker text for contrast */
-            -webkit-font-smoothing: antialiased; /* Smoother fonts on Webkit */
-            -moz-osx-font-smoothing: grayscale; /* Smoother fonts on Firefox */
-        }
-
-        /* Header styles (keeping consistent with your brand) */
-        .header-bg {
-            background: linear-gradient(90deg, #171615 0%, #f86700 100%);
-            box-shadow: 0 4px 24px 0 rgba(248,103,0,0.15); /* Slightly stronger shadow */
-            position: relative; /* Needed for overlay */
-            overflow: hidden; /* Important for gradient overlay */
-        }
-        .header-gradient-overlay {
-            position: absolute;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            width: 220px;
-            pointer-events: none;
-            background: radial-gradient(circle at 95% 50%, rgba(255,255,255,0.1) 0%, transparent 70%); /* More subtle white radial gradient */
-        }
-        .nav-link {
-            font-family: 'Iceland', serif;
-            color: #fff;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.9rem;
-            position: relative;
-            transition: all .2s ease-in-out; /* Smooth transition */
-        }
-        .nav-link .underline-animate {
-            display: block;
-            height: 2px;
-            width: 100%;
-            background: #f86700;
-            position: absolute;
-            left: 0;
-            bottom: -3px;
-            border-radius: 2px;
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform .2s ease-in-out, background .2s ease-in-out, height .2s ease-in-out;
-        }
-        .nav-link:hover .underline-animate {
-            transform: scaleX(1);
-            background: #fff;
-            height: 3px;
-        }
-
-        /* Article specific styles */
-        .news-category-custom {
-            color: #d64d00; /* Slightly deeper orange for categories */
-            font-weight: 700; /* Bolder category text */
-            text-transform: uppercase;
-            letter-spacing: 0.05em; /* A little letter spacing for category */
-        }
-
-        .article-container {
-            max-width: 100%;
-            margin: 0 auto;
-            background-color: #ffffff;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08); /* More refined, softer shadow */
-            border-radius: 8px; /* Rounded corners for the entire article block */
-            overflow: hidden; /* Ensures image and content stay within rounded corners */
-            margin-bottom: 32px; /* Keep margin at bottom */
-        }
-
-        .article-image-full {
-            width: 100%;
-            height: 650px; /* Even taller for more impact */
-            object-fit: cover;
-            display: block;
-            filter: brightness(0.95); /* Slightly darker image for text contrast if text overlays */
-        }
-
-        .article-content-wrapper {
-            max-width: 900px; /* Optimal reading width */
-            margin: 0 auto;
-            padding: 48px 32px; /* More generous padding */
-            box-sizing: border-box;
-        }
-
-        .article-title {
-            font-family: 'Inter', sans-serif; /* Explicitly set for titles */
-            font-size: 4rem; /* Even larger for stronger impact */
-            line-height: 1.1;
-            font-weight: 800; /* Extra bold */
-            color: #212529; /* Very dark gray for strong title contrast */
-            margin-bottom: 24px; /* More space below title */
-            letter-spacing: -0.02em; /* Tighter letter spacing for large titles */
-        }
-
-        .article-meta {
-            display: flex;
-            flex-wrap: wrap; /* Allow wrapping on smaller screens */
-            align-items: center;
-            font-size: 0.95rem; /* Slightly larger meta info */
-            color: #6c757d; /* Medium gray for meta info */
-            margin-bottom: 32px; /* More space after meta info */
-        }
-        .article-meta .news-category-custom {
-            margin-right: 20px; /* More space */
-        }
-        .article-meta span:last-child {
-            margin-left: 0; /* Ensure no extra margin if only one item */
-        }
-
-        .article-body-text {
-            font-size: 1.15rem; /* Larger body text for better readability */
-            line-height: 1.85; /* Optimized line height */
-            color: #495057; /* Slightly lighter body text for softer feel */
-            margin-bottom: 24px;
-        }
-        
-        /* Styles for the "Back to News" button */
-        .back-button-container {
-            display: flex; /* Use flexbox to align content */
-            justify-content: flex-start; /* Aligns items to the start (left) */
-            margin-top: 48px; /* More space above the button */
-            padding-top: 32px; /* More padding above the border */
-            border-top: 1px solid #e9ecef; /* Lighter border for separation */
-        }
-
-        .back-button {
-            background-color: #f86700;
-            color: white;
-            font-weight: 600;
-            padding: 18px 30px; /* Adjusted padding slightly */
-            border-radius: 9999px; /* Pill-shaped button */
-            transition: all 0.3s ease-in-out; /* Smooth transition for all properties */
-            box-shadow: 0 5px 15px rgba(248,103,0,0.25); /* Subtle shadow for button */
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            display: inline-flex; /* Allows icon and text to align */
-            align-items: center; /* Vertically center icon and text */
-            text-decoration: none; /* Remove underline for anchor tag */
-        }
-        .back-button:hover {
-            background-color: #e05e00; /* Darker on hover */
-            transform: translateY(-2px); /* Slight lift effect */
-            box-shadow: 0 8px 20px rgba(248,103,0,0.35); /* Enhanced shadow on hover */
-            opacity: 1; /* Ensure full opacity on hover */
-        }
-        .back-button i {
-            margin-right: 12px; /* Space between icon and text */
-            font-size: 1.1em; /* Slightly larger icon */
-            transition: margin-right 0.3s ease-in-out; /* Smooth transition for icon movement */
-        }
-        .back-button:hover i {
-            margin-right: 15px; /* Move icon slightly further on hover */
-        }
-
-
-        /* Hamburger menu styles (copied for consistency) */
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            justify-content: center;
-            width: 36px;
-            height: 36px;
-            cursor: pointer;
-            z-index: 60;
-        }
-        .hamburger span {
-            height: 4px;
-            width: 100%;
-            background: #fff;
-            margin: 4px 0;
-            border-radius: 2px;
-            transition: 0.3s;
-            display: block;
-        }
-        @media (max-width: 900px) {
-            nav ul {
-                display: none;
-                flex-direction: column !important;
-                background: #171615;
-                position: absolute;
-                top: 70px;
-                right: 0;
-                width: 200px;
-                box-shadow: 0 4px 24px 0 rgba(0,0,0,0.10);
-                border-radius: 0 0 0 12px;
-                padding: 16px 0;
-            }
-            nav ul.open {
-                display: flex;
-            }
-            .hamburger {
-                display: flex;
-            }
-            .article-title {
-                font-size: 2.8rem; /* Adjusted for mobile */
-                line-height: 1.2;
-            }
-            .article-image-full {
-                height: 350px; /* Adjusted for mobile */
-            }
-            .article-content-wrapper {
-                padding: 32px 16px; /* Adjust padding for smaller screens */
-            }
-            .back-button-container {
-                justify-content: center; /* Center button on small screens */
-            }
-            .back-button {
-                padding: 14px 24px; /* Adjust button size for mobile */
-                font-size: 0.9rem;
-            }
-        }
-        @media (max-width: 500px) {
-            .article-title {
-                font-size: 2.2rem; /* Even smaller for very small screens */
-            }
-            .article-image-full {
-                height: 250px; /* Even smaller for very small screens */
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="pageTitle">Artikel</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Iceland&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      line-height: 1.7;
+      color: #343a40;
+    }
+    .header-bg {
+      background: linear-gradient(90deg, #171615 0%, #f86700 100%);
+      box-shadow: 0 4px 24px 0 rgba(248, 103, 0, 0.15);
+      position: relative;
+      overflow: hidden;
+    }
+    .header-gradient-overlay {
+      position: absolute;
+      right: 0; top: 0; bottom: 0; width: 220px;
+      pointer-events: none;
+      background: radial-gradient(circle at 95% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    }
+    .nav-link {
+      font-family: 'Iceland', serif;
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.9rem;
+      position: relative;
+      transition: all 0.2s ease-in-out;
+    }
+    .nav-link .underline-animate {
+      display: block;
+      height: 2px;
+      width: 100%;
+      background: #f86700;
+      position: absolute;
+      left: 0;
+      bottom: -3px;
+      border-radius: 2px;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.2s, background 0.2s, height 0.2s;
+    }
+    .nav-link:hover .underline-animate {
+      transform: scaleX(1);
+      background: #fff;
+      height: 3px;
+    }
+    .news-category-custom {
+      color: #d64d00;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .article-container {
+      max-width: 100%;
+      margin: 0 auto;
+      background-color: #ffffff;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 32px;
+    }
+    .article-image-full {
+      width: 100%;
+      height: 650px;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.95);
+    }
+    .article-content-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 48px 32px;
+      box-sizing: border-box;
+    }
+    .article-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 4rem;
+      line-height: 1.1;
+      font-weight: 800;
+      color: #212529;
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      font-size: 0.95rem;
+      color: #6c757d;
+      margin-bottom: 32px;
+    }
+    .article-meta .news-category-custom {
+      margin-right: 20px;
+    }
+    .article-body-text {
+      font-size: 1.15rem;
+      line-height: 1.85;
+      color: #495057;
+      margin-bottom: 24px;
+    }
+    .back-button-container {
+      display: flex;
+      justify-content: flex-start;
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid #e9ecef;
+    }
+    .back-button {
+      background-color: #f86700;
+      color: white;
+      font-weight: 600;
+      padding: 18px 30px;
+      border-radius: 9999px;
+      transition: all 0.3s ease-in-out;
+      box-shadow: 0 5px 15px rgba(248, 103, 0, 0.25);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+    }
+    .back-button:hover {
+      background-color: #e05e00;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(248, 103, 0, 0.35);
+    }
+    .back-button i {
+      margin-right: 12px;
+      font-size: 1.1em;
+      transition: margin-right 0.3s;
+    }
+    .back-button:hover i {
+      margin-right: 15px;
+    }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      cursor: pointer;
+      z-index: 60;
+    }
+    .hamburger span {
+      height: 4px;
+      width: 100%;
+      background: #fff;
+      margin: 4px 0;
+      border-radius: 2px;
+      display: block;
+    }
+    @media (max-width: 900px) {
+      nav ul {
+        display: none;
+        flex-direction: column !important;
+        background: #171615;
+        position: absolute;
+        top: 70px;
+        right: 0;
+        width: 200px;
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+        border-radius: 0 0 0 12px;
+        padding: 16px 0;
+      }
+      nav ul.open {
+        display: flex;
+      }
+      .hamburger {
+        display: flex;
+      }
+      .article-title {
+        font-size: 2.8rem;
+      }
+      .article-image-full {
+        height: 350px;
+      }
+      .article-content-wrapper {
+        padding: 32px 16px;
+      }
+      .back-button-container {
+        justify-content: center;
+      }
+      .back-button {
+        padding: 14px 24px;
+        font-size: 0.9rem;
+      }
+    }
+    @media (max-width: 500px) {
+      .article-title {
+        font-size: 2.2rem;
+      }
+      .article-image-full {
+        height: 250px;
+      }
+    }
+  </style>
 </head>
 <body class="bg-gray-100">
 
-    <header class="header-bg">
-        <div class="header-gradient-overlay"></div>
-        <div class="container mx-auto flex items-center justify-between py-8 px-4 sm:px-6 relative z-10">
-            <div class="flex items-center gap-4 sm:gap-6">
-                <a href="index.html" class="flex items-center">
-                    <img src="assets/images/logowhite.png" alt="FutureArc Logo" class="h-10 w-auto block">
-                </a>
-                <span class="bg-[#f86700] text-white text-base font-semibold px-3 py-1 rounded-md tracking-wider shadow-sm flex items-center h-10">ARTIKEL</span>
-            </div>
-            <nav class="relative">
-                <div class="hamburger" id="hamburgerBtn" aria-label="Öppna meny" tabindex="0">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-                <ul id="navMenu" class="list-none flex gap-6 sm:gap-8 m-0 p-0">
-                    <li>
-                        <a href="index.html" class="nav-link">
-                            Hem
-                            <span class="underline-animate"></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="news.html" class="nav-link">
-                            Nyheter
-                            <span class="underline-animate"></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="about.html" class="nav-link">
-                            Om oss
-                            <span class="underline-animate"></span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+  <header class="header-bg">
+    <div class="header-gradient-overlay"></div>
+    <div class="container mx-auto flex items-center justify-between py-8 px-4 sm:px-6 relative z-10">
+      <div class="flex items-center gap-4 sm:gap-6">
+        <a href="index.html"><img src="assets/images/logowhite.png" alt="FutureArc Logo" class="h-10 w-auto block" /></a>
+        <span class="bg-[#f86700] text-white text-base font-semibold px-3 py-1 rounded-md tracking-wider shadow-sm flex items-center h-10">ARTIKEL</span>
+      </div>
+      <nav class="relative">
+        <div class="hamburger" id="hamburgerBtn"><span></span><span></span><span></span></div>
+        <ul id="navMenu" class="list-none flex gap-6 sm:gap-8 m-0 p-0">
+          <li><a href="index.html" class="nav-link">Hem <span class="underline-animate"></span></a></li>
+          <li><a href="news.html" class="nav-link">Nyheter <span class="underline-animate"></span></a></li>
+          <li><a href="about.html" class="nav-link">Om oss <span class="underline-animate"></span></a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="py-0">
+    <div class="article-container">
+      <img id="articleImage" src="" alt="Artikelbild" class="article-image-full" />
+      <div class="article-content-wrapper">
+        <h1 id="articleTitle" class="article-title"></h1>
+        <div class="article-meta">
+          <span id="articleCategory" class="news-category-custom"></span>
+          <span id="articleTimestamp"></span>
         </div>
-    </header>
+        <p id="articleExcerpt" class="article-body-text"></p>
+        <div id="articleBody"></div>
 
-    <main class="py-0">
-        <div class="article-container">
-            <img id="articleImage" src="" alt="Artikelbild" class="article-image-full">
-            
-            <div class="article-content-wrapper">
-                <h1 id="articleTitle" class="article-title"></h1>
-                <div class="article-meta">
-                    <span id="articleCategory" class="news-category-custom"></span>
-                    <span id="articleTimestamp"></span>
-                </div>
-                <p id="articleExcerpt" class="article-body-text"></p>
-                
-                <p class="article-body-text">
-                    Denna sektion är avsedd för den fullständiga brödtexten i din artikel. För att uppnå ett professionellt utseende är det viktigt med en tydlig och konsekvent typografi. Vi har justerat radhöjd och textstorlek för att maximera läsbarheten på olika skärmar. Tänk på att använda undertexter, listor eller citat för att bryta upp långa textblock och göra informationen mer lättsmält.
-                </p>
-                <p class="article-body-text">
-                    En välstrukturerad artikel med tillräckligt med vitt utrymme runt texten förbättrar inte bara estetiken utan också användarupplevelsen avsevärt. Användningen av högkvalitativa bilder som är relevanta för innehållet är också avgörande för att få artikeln att kännas komplett och professionell.
-                </p>
-                <p class="article-body-text">
-                    Slutligen, se till att all information är korrekt och välskriven. Professionell presentation handlar lika mycket om innehållets kvalitet som om designen.
-                </p>
-
-                <div class="back-button-container">
-                    <a href="news.html" class="back-button">
-                        <i class="fas fa-arrow-left"></i> Tillbaka till Nyheter
-                    </a>
-                </div>
-            </div>
+        <div class="back-button-container">
+          <a href="news.html" class="back-button"><i class="fas fa-arrow-left"></i> Tillbaka till Nyheter</a>
         </div>
-    </main>
+      </div>
+    </div>
+  </main>
 
-    <footer class="bg-gray-800 text-white text-center p-6 mt-8">
-        <p>&copy; <span id="currentYear"></span> Din Nyhetssida. Alla rättigheter förbehållna.</p>
-    </footer>
+  <footer class="bg-gray-800 text-white text-center p-6 mt-8">
+    <p>&copy; <span id="currentYear"></span> Din Nyhetssida. Alla rättigheter förbehållna.</p>
+  </footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('currentYear').textContent = new Date().getFullYear();
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-            const urlParams = new URLSearchParams(window.location.search);
-            const title = urlParams.get('title');
-            const category = urlParams.get('category');
-            const timestamp = urlParams.get('timestamp');
-            const image = urlParams.get('image');
-            const excerpt = urlParams.get('excerpt');
+      const urlParams = new URLSearchParams(window.location.search);
+      const title = urlParams.get('title');
+      const category = urlParams.get('category');
+      const timestamp = urlParams.get('timestamp');
+      const image = urlParams.get('image');
+      const excerpt = urlParams.get('excerpt');
 
-            document.getElementById('pageTitle').textContent = decodeURIComponent(title);
-            document.getElementById('articleTitle').textContent = decodeURIComponent(title);
-            document.getElementById('articleCategory').textContent = decodeURIComponent(category);
-            document.getElementById('articleTimestamp').textContent = decodeURIComponent(timestamp);
-            document.getElementById('articleImage').src = decodeURIComponent(image);
-            document.getElementById('articleImage').alt = decodeURIComponent(title);
-            document.getElementById('articleExcerpt').textContent = decodeURIComponent(excerpt);
+      document.getElementById('pageTitle').textContent = decodeURIComponent(title);
+      document.getElementById('articleTitle').textContent = decodeURIComponent(title);
+      document.getElementById('articleCategory').textContent = decodeURIComponent(category);
+      document.getElementById('articleTimestamp').textContent = decodeURIComponent(timestamp);
+      document.getElementById('articleImage').src = decodeURIComponent(image);
+      document.getElementById('articleImage').alt = decodeURIComponent(title);
+      document.getElementById('articleExcerpt').textContent = decodeURIComponent(excerpt);
 
-            const hamburgerBtn = document.getElementById('hamburgerBtn');
-            const navMenu = document.getElementById('navMenu');
-            if (hamburgerBtn && navMenu) {
-                hamburgerBtn.onclick = function(e) {
-                    navMenu.classList.toggle('open');
-                    e.stopPropagation();
-                };
-                document.addEventListener('click', function(e) {
-                    if (window.innerWidth <= 900) {
-                        if (!navMenu.contains(e.target) && !hamburgerBtn.contains(e.target)) {
-                            navMenu.classList.remove('open');
-                        }
-                    }
-                });
+      // Hämta fullständig text från nyheter.json
+        fetch('nyheter.json')
+        .then(res => res.json())
+        .then(data => {
+            const article = data.find(item => item.title === decodeURIComponent(title));
+            if (article && article.body) {
+            const container = document.getElementById('articleBody');
+            // Om body innehåller radbrytningar, dela upp i stycken
+            article.body.split('\n').forEach(para => {
+                const p = document.createElement('p');
+                p.textContent = para.trim();
+                p.className = 'article-body-text';
+                container.appendChild(p);
+            });
             }
         });
-        // No specific JS for the back button, as it's now a standard <a> tag
-        // that directly links to news.html.
-    </script>
+
+      const hamburgerBtn = document.getElementById('hamburgerBtn');
+      const navMenu = document.getElementById('navMenu');
+      if (hamburgerBtn && navMenu) {
+        hamburgerBtn.onclick = function (e) {
+          navMenu.classList.toggle('open');
+          e.stopPropagation();
+        };
+        document.addEventListener('click', function (e) {
+          if (window.innerWidth <= 900 && !navMenu.contains(e.target) && !hamburgerBtn.contains(e.target)) {
+            navMenu.classList.remove('open');
+          }
+        });
+      }
+    });
+  </script>
 </body>
 </html>

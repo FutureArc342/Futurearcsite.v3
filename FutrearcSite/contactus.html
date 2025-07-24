@@ -1,42 +1,44 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kontakta</title>
+    <title>Kontakta Oss - FutureArc</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
 </head>
 <body>
-    <!-- Rörliga ikoner runt containern -->
-    <div class="floating-icons">
-        <i class="fas fa-envelope floating-icon" style="top: 15%; left: 5%;"></i>
-        <i class="fas fa-phone floating-icon" style="top: 25%; right: 7%;"></i>
-        <i class="fas fa-comment-dots floating-icon" style="top: 65%; left: 8%;"></i>
-        <i class="fas fa-headset floating-icon" style="top: 65%; right: 6%;"></i>
-        <i class="fas fa-comments floating-icon" style="top: 40%; left: 3%;"></i>
-        <i class="fas fa-paper-plane floating-icon" style="top: 50%; right: 4%;"></i>
-        <i class="fas fa-bell floating-icon" style="top: 25%; left: 10%;"></i>
-        <i class="fas fa-share-alt floating-icon" style="top: 10%; right: 10%;"></i>
-    </div>
-
     <div include-html="components/header.html"></div>
     <hr class="section-divider">
+
     <div class="contact-container">
-        <!-- Vänster sida - Formulär -->
         <div class="contact-form">
             <h1>Kontakta oss</h1>
-            <p>Hör av dig och låt oss veta hur vi kan hjälpa.</p>
+            <p class="subtitle">Fyll i formuläret nedan, eller maila oss direkt på <a href="mailto:info@futurearcmedia.com">info@futurearcmedia.com</a>.</p>
 
-            <form id="contact-form">
-                <input type="text" id="name" name="name" placeholder="Ditt namn" required />
-                <input type="email" id="email" name="email" placeholder="Din e-post" required />
-                <textarea id="message" name="message" placeholder="Meddelande" required></textarea>
-                <button type="submit">Skicka</button>
-              </form>
+            <form id="contact-form" novalidate>
+                <div class="form-group">
+                    <label for="name">Ditt namn</label>
+                    <input type="text" id="name" name="name" required />
+                </div>
+                <div class="form-group">
+                    <label for="email">Din e-post</label>
+                    <input type="email" id="email" name="email" required />
+                </div>
+                <div class="form-group">
+                    <label for="message">Meddelande</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit">Skicka meddelande</button>
+
+                <div id="form-feedback"></div>
+            </form>
               
-
-            <!-- Följ oss-sektion -->
             <div class="follow-us">
                 <div class="social-icons-contact">
                     <a href="https://www.linkedin.com/company/futurearcmedia" class="social-link-contact" aria-label="LinkedIn" target="_blank">
@@ -55,7 +57,6 @@
             </div>
         </div>
 
-        <!-- Höger sida - FAQ (mindre storlek) -->
         <div class="faq-section">
             <h2>Vanliga frågor</h2>
             
@@ -66,17 +67,17 @@
                         <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
                     </div>
                     <div class="faq-answer">
-                        <p>Du kan kontakta oss via formuläret på denna sida eller genom att skicka ett <br> e-postmeddelande till info@futurearcmedia.com.</p>
+                        <p>Du kan kontakta oss via formuläret på denna sida eller genom att skicka ett e-postmeddelande till <a href="mailto:info@futurearcmedia.com">info@futurearcmedia.com</a>.</p>
                     </div>
                 </div>
                 
                 <div class="faq-item">
                     <div class="faq-question">
-                        <h3>Vilka är era öppettider?</h3>
+                        <h3>Vad är FutureArc?</h3>
                         <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
                     </div>
                     <div class="faq-answer">
-                        <p>Våra öppettider är måndag till fredag, 9:00 till 17:00.</p>
+                        <p>Future Arc är en community för tech-entusiaster och programmerare i Sverige. Här kommer du kunna nätverka, ta del av tech-nyheter, lära dig genom kurser och få hjälp från likasinnade.</p>
                     </div>
                 </div>
                 
@@ -94,7 +95,6 @@
     </div>
     <hr class="section-divider">
 
-    <!-- Sidfot -->
     <footer>
         <div class="footer" include-html="components/footer.html"></div>
     </footer>
@@ -102,166 +102,99 @@
     <style>
 /* Grundläggande stil för hela sidan */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Inter', sans-serif;
     margin: 0;
     padding: 0;
     background-color: #141414;
-    color: #333;
+    color: #f0f0f0;
     position: relative;
     overflow-x: hidden;
 }
 
-/* Stil för rörliga ikoner */
-.floating-icons {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 0;
-}
-
-.floating-icon {
-    position: absolute;
-    color: #f86700;
-    opacity: 0.3;
-    font-size: 26px;
-    animation: float 8s infinite ease-in-out;
-    filter: drop-shadow(0 0 8px rgba(248, 103, 0, 0.4));
-    z-index: 1;
-}
-
-.floating-icon:nth-child(even) {
-    animation-duration: 10s;
-    animation-delay: 1s;
-}
-
-.floating-icon:nth-child(3n) {
-    animation-duration: 12s;
-    animation-delay: 2s;
-}
-
-.floating-icon:nth-child(4n) {
-    animation-duration: 14s;
-    animation-delay: 3s;
-}
-
-@keyframes float {
-    0%, 100% {
-        transform: translateY(0) rotate(0deg) scale(1);
-    }
-    25% {
-        transform: translateY(-20px) rotate(10deg) scale(1.05);
-    }
-    50% {
-        transform: translateY(10px) rotate(-5deg) scale(1);
-    }
-    75% {
-        transform: translateY(-10px) rotate(5deg) scale(0.95);
-    }
-}
-
-/* Justera positioneringen av ikonerna */
-.floating-icon:nth-child(1) { top: 10%; left: 0; }
-.floating-icon:nth-child(2) { top: 20%; right: 0; }
-.floating-icon:nth-child(3) { top: 30%; left: 0; }
-.floating-icon:nth-child(4) { top: 40%; right: 0; }
-.floating-icon:nth-child(5) { top: 50%; left: 0; }
-.floating-icon:nth-child(6) { top: 60%; right: 0; }
-.floating-icon:nth-child(7) { top: 70%; left: 0; }
-.floating-icon:nth-child(8) { top: 80%; right: 0; }
-
-/* Container för innehållet */
+/* Container för innehållet - förfinad stil */
 .contact-container {
     position: relative;
     display: flex;
     max-width: 1200px;
     margin: 50px auto;
-    padding: 20px;
-    background: url('./assets/Images/testbak.jpg') no-repeat center center; /* Bakgrundsbild */
-    background-size: cover; /* Täck hela containern */
-    box-shadow: 0 0 30px rgba(248, 103, 0, 0.7); /* Ökad skugga */
-    border: 2px solid #f86700; /* Tydligare ram */
-    border-radius: 10px;
+    padding: 30px;
+    background-color: #1a1a1a; /* Solid, mörk färg för bättre fokus */
+    box-shadow: 0 0 35px rgba(248, 103, 0, 0.2); /* Mjukare, mer subtil glöd */
+    border: 1px solid rgba(248, 103, 0, 0.3); /* Tunnare, semi-transparent ram */
+    border-radius: 12px;
     overflow: hidden;
     z-index: 2;
+    gap: 30px; /* Mellanrum mellan formulär och FAQ */
 }
 
 /* Vänster sida - Formulär */
 .contact-form {
     flex: 1.3;
     padding: 20px;
-    background: rgba(0, 0, 0, 0.5); /* Suddig effekt */
+    background: transparent; /* Ingen extra bakgrund behövs */
     border-radius: 10px;
-    z-index: 2;
 }
 
-/* Höger sida - FAQ (minskad storlek) */
+/* Höger sida - FAQ */
 .faq-section {
     flex: 0.7;
-    padding: 15px;
-    background: rgba(0, 0, 0, 0.5); /* Suddig effekt */
+    padding: 20px;
+    background: transparent;
     border-radius: 10px;
-    z-index: 2;
-    margin-left: 20px;
-    max-width: 350px;
+    max-width: 400px;
 }
 
 .faq-section h2 {
     color: #f86700;
     margin-bottom: 20px;
     font-size: 24px;
+    font-weight: 700;
     text-align: center;
     position: relative;
-    padding-bottom: 8px;
+    padding-bottom: 10px;
 }
 
 .faq-section h2:after {
     content: '';
     position: absolute;
-    width: 50px;
+    width: 60px;
     height: 3px;
     background-color: #f86700;
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
+    border-radius: 2px;
 }
 
-/* Optimerad FAQ stil med accordion */
+/* FAQ Accordion stil */
 .faq-accordion {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
 }
 
 .faq-item {
-    background-color: rgba(30, 30, 30, 0.7);
+    background-color: #222;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: all 0.2s ease;
-    border-left: 2px solid #f86700;
-}
-
-.faq-item:hover {
-    box-shadow: 0 4px 8px rgba(248, 103, 0, 0.2);
+    border-left: 3px solid #f86700;
 }
 
 .faq-question {
-    padding: 12px 15px;
+    padding: 15px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
-    background: linear-gradient(90deg, rgba(40, 40, 40, 0.9), rgba(50, 50, 50, 0.9));
 }
 
 .faq-question h3 {
     margin: 0;
     color: #fff;
-    font-size: 15px;
-    font-weight: bolder;
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.2s ease;
 }
 
 .faq-question:hover h3 {
@@ -270,214 +203,206 @@ body {
 
 .faq-icon {
     color: #f86700;
-    transition: transform 0.2s ease;
+    transition: transform 0.3s ease;
 }
 
-.faq-icon i {
-    font-size: 12px;
+.faq-item.active .faq-icon {
+    transform: rotate(180deg);
 }
 
-/* Stil för FAQ-svar */
 .faq-answer {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease-out;
-    background-color: rgba(35, 35, 35, 0.8);
+    transition: max-height 0.4s ease-out;
+    background-color: #1c1c1c;
+}
+
+.faq-answer p {
+    padding: 0 20px 15px 20px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #ccc;
+    font-weight: 400;
+}
+.faq-answer a {
+    color: #f86700;
+    text-decoration: none;
+}
+.faq-answer a:hover {
+    text-decoration: underline;
 }
 
 .faq-item.active .faq-answer {
-    max-height: 200px; /* Öka maxhöjden för att visa mer innehåll */
-}  /* om det behövs då kan man lägga till "overflow-y: scroll;"  för få en scrollningsknapp */
-
-.faq-item.active .faq-answer::-webkit-scrollbar {
-    width: 8px;
+    max-height: 200px; 
 }
 
-.faq-item.active .faq-answer::-webkit-scrollbar-thumb {
-    background-color: #f86700;
-    border-radius: 4px;
-}
-
-.faq-item.active .faq-answer::-webkit-scrollbar-track {
-    background-color: rgba(35, 35, 35, 0.8);
-}
-
-/* Stil för rubriken */
+/* Stil för rubriker och text */
 h1 {
     margin-top: 5px;
     color: #f86700;
-    font-size: 2.5rem;
-    margin-bottom: 20px;
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 10px;
 }
 
-p {
-    color: #fff;
-    margin-bottom: 20px;
-    font-weight: bold;
-}  
+p.subtitle {
+    color: #ccc;
+    margin-bottom: 30px;
+    font-weight: 400;
+    font-size: 1.1rem;
+}
+p.subtitle a {
+    color: #f86700;
+    text-decoration: none;
+    font-weight: 500;
+}
+p.subtitle a:hover {
+    text-decoration: underline;
+}
 
 /* Stil för formuläret */
 form {
     display: flex;
     flex-direction: column;
 }
+.form-group {
+    margin-bottom: 20px;
+}
 
-/* Stil för varje fält i formuläret */
 form label {
-    color: #fff;
-    margin-bottom: 5px;
-    font-weight: bold;
+    display: block;
+    color: #ddd;
+    margin-bottom: 8px;
+    font-weight: 500;
+    font-size: 0.9rem;
 }
 
 form input, form textarea {
-    margin-bottom: 20px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #444;
+    border-radius: 6px;
     background-color: #2a2a2a;
     color: #fff;
-    resize: none; /* Inaktivera manuell storleksändring */
+    resize: vertical;
+    box-sizing: border-box; /* Viktigt för padding och border */
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+form input:focus, form textarea:focus {
+    outline: none;
+    border-color: #f86700;
+    box-shadow: 0 0 0 3px rgba(248, 103, 0, 0.3);
 }
 
 form input::placeholder, form textarea::placeholder {
-    color: #bbb;
+    color: #888;
 }
 
-/* Stil för knappen */
+/* Stil för knappen - Förenklad och elegant */
 form button {
-    margin-bottom: 20px;
     padding: 15px 20px;
     background-color: #f25c05;
     color: white;
     font-size: 16px;
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
     cursor: pointer;
-    font-weight: bold;
+    font-weight: 700;
     transition: all 0.3s ease;
-    box-shadow: 0 0 15px rgba(242, 92, 5, 0.3);
-    position: relative;
-    overflow: hidden;
-}
-
-form button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.2);
-    transition: left 0.5s ease;
-    z-index: 1;
-}
-
-form button:hover::before {
-    left: 100%;
+    margin-top: 10px;
 }
 
 form button:hover {
-    background: linear-gradient(90deg, #f25c05, #ff8727);
-    border: none;
+    background-color: #ff801a;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(242, 92, 5, 0.3);
+}
+
+/* Stil för formulär-feedback */
+#form-feedback {
+    padding: 12px;
+    margin-top: 20px;
+    border-radius: 6px;
+    text-align: center;
+    font-weight: 500;
+    display: none; /* Dold som standard */
+}
+#form-feedback.success {
+    display: block;
+    background-color: #2a9d8f;
     color: white;
-    transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(242, 92, 5, 0.5);
+}
+#form-feedback.error {
+    display: block;
+    background-color: #e76f51;
+    color: white;
 }
 
-/* Ny ljuseffekt */
-form button::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
-    transition: left 0.5s ease;
-    z-index: 0;
-}
-
-form button:hover::after {
-    left: 100%;
-}
 
 /* Stil för följ oss-sektionen */
 .follow-us {
-    margin-top: 20px;
-    font-size: 14px;
-    color: #fff;
+    margin-top: 40px;
     text-align: center;
-    margin-bottom: 20px;
 }
 
 .social-icons-contact {
     display: flex;
     justify-content: center;
-    gap: 3rem;
-    margin-top: 10px;
+    gap: 2rem;
+    margin-top: 15px;
 }
 
 .social-link-contact {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 60px;
-    height: 60px;
-    background-color: #f86700;
+    width: 50px;
+    height: 50px;
+    background-color: #333;
     border-radius: 50%;
     transition: all 0.3s ease;
     text-decoration: none;
-    transform: translateY(0);
 }
 
 .social-link-contact i {
-    color: #1a1b1e;
-    font-size: 28px;
+    color: #f86700;
+    font-size: 24px;
     transition: all 0.3s ease;
 }
 
 .social-link-contact:hover {
-    transform: translateY(-8px);
-    background-color: #1a1b1e;
-    box-shadow: 0 5px 15px rgba(248, 103, 0, 0.4);
+    transform: translateY(-5px);
+    background-color: #f86700;
 }
 
 .social-link-contact:hover i {
-    color: #f86700;
-    transform: scale(1.1);
+    color: #1a1b1e;
 }
 
 /* Media Queries för mobilanpassning */
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     .contact-container {
         flex-direction: column;
-        padding: 10px;
+        padding: 20px;
+        margin: 30px auto;
     }
-
-    .contact-form {
-        padding-right: 0;
-        margin-bottom: 20px;
-    }
-
     .faq-section {
-        margin-left: 0;
         max-width: 100%;
     }
-
+}
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.2rem;
+    }
     .social-icons-contact {
-        gap: 1rem;
+        gap: 1.5rem;
     }
-
     .social-link-contact {
-        width: 50px;
-        height: 50px;
+        width: 45px;
+        height: 45px;
     }
-
     .social-link-contact i {
-        font-size: 24px;
-    }
-    
-    .floating-icon {
         font-size: 20px;
     }
 }
@@ -485,34 +410,150 @@ form button:hover::after {
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Ladda include-html komponenter
+        
+        // --- ALLMÄNNA FUNKTIONER ---
+        
+        // Ladda include-html komponenter (Header/Footer)
         includeHTML();
         
-        // Toggle FAQ items - optimerad kod
+        // Hantera FAQ accordion
         const faqQuestions = document.querySelectorAll('.faq-question');
-        
         faqQuestions.forEach(question => {
             question.addEventListener('click', function() {
-                // Get parent item
                 const faqItem = this.parentElement;
+                faqItem.classList.toggle('active');
                 
-                // Toggle active class
-                const isActive = faqItem.classList.contains('active');
-                
-                // Stäng alla först för bättre prestanda
-                document.querySelectorAll('.faq-item.active').forEach(item => {
-                    item.classList.remove('active');
+                // Stäng andra öppna items för en "accordion"-effekt
+                document.querySelectorAll('.faq-item.active').forEach(openItem => {
+                    if (openItem !== faqItem) {
+                        openItem.classList.remove('active');
+                    }
                 });
-                
-                // Öppna bara om den inte var öppen
-                if (!isActive) {
-                    faqItem.classList.add('active');
-                }
             });
         });
+
+        // --- ANIMERAD PLATSHÅLLARE FÖR FORMULÄR ---
+
+        const placeholderTexts = {
+            name: 'T.ex. Ada Lovelace',
+            email: 'ada.lovelace@example.com',
+            message: 'Hej, jag är intresserad av era kurser...'
+        };
+        
+        const animationStates = {};
+
+        function typeAnimation(element, text) {
+            let i = 0;
+            let isDeleting = false;
+            
+            // Rensa eventuell gammal animation för detta element
+            if (animationStates[element.id]) {
+                clearInterval(animationStates[element.id]);
+            }
+
+            const typingInterval = setInterval(() => {
+                if (isDeleting) {
+                    element.placeholder = text.substring(0, i - 1);
+                    i--;
+                    if (i === 0) {
+                        isDeleting = false;
+                        // Paus innan den börjar skriva igen
+                        clearInterval(typingInterval);
+                        setTimeout(() => typeAnimation(element, text), 2000);
+                    }
+                } else {
+                    element.placeholder = text.substring(0, i + 1);
+                    i++;
+                    if (i > text.length) {
+                        isDeleting = true;
+                        // Paus när texten är fullt utskriven
+                        clearInterval(typingInterval);
+                        setTimeout(() => typeAnimation(element, text), 3000);
+                    }
+                }
+            }, isDeleting ? 50 : 100);
+
+            animationStates[element.id] = typingInterval;
+        }
+
+        function stopAnimation(element) {
+            if (animationStates[element.id]) {
+                clearInterval(animationStates[element.id]);
+                delete animationStates[element.id];
+            }
+            element.placeholder = ''; // Rensa platshållare när användaren klickar
+        }
+
+        Object.keys(placeholderTexts).forEach(id => {
+            const inputElement = document.getElementById(id);
+            if (inputElement) {
+                // Starta animationen
+                typeAnimation(inputElement, placeholderTexts[id]);
+
+                // Stoppa animationen vid fokus
+                inputElement.addEventListener('focus', () => stopAnimation(inputElement));
+
+                // Starta igen om fältet lämnas tomt
+                inputElement.addEventListener('blur', () => {
+                    if (inputElement.value === '') {
+                        typeAnimation(inputElement, placeholderTexts[id]);
+                    }
+                });
+            }
+        });
+
+        // --- FORMULÄR-SUBMISSION ---
+        const form = document.getElementById('contact-form');
+        const feedbackElement = document.getElementById('form-feedback');
+
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const message = document.getElementById('message').value;
+
+                if (!name || !email || !message) {
+                    feedbackElement.textContent = 'Vänligen fyll i alla fält.';
+                    feedbackElement.className = 'error';
+                    return;
+                }
+                
+                feedbackElement.textContent = 'Skickar...';
+                feedbackElement.className = 'success'; // Använder success-stilen för "skickar"
+                
+                fetch('http://localhost:5001/api/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, message }),
+                })
+                .then(response => {
+                    if (!response.ok) throw new Error('Network response was not ok');
+                    return response.json();
+                })
+                .then(data => {
+                    feedbackElement.textContent = 'Tack! Ditt meddelande har skickats.';
+                    feedbackElement.className = 'success';
+                    form.reset();
+                    // Starta om animationerna för tomma fält efter reset
+                    Object.keys(placeholderTexts).forEach(id => {
+                        const inputElement = document.getElementById(id);
+                        if(inputElement.value === '') {
+                           typeAnimation(inputElement, placeholderTexts[id]);
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.error('Fetch Error:', error);
+                    feedbackElement.textContent = 'Något gick fel, försök igen senare.';
+                    feedbackElement.className = 'error';
+                });
+            });
+        }
     });
 
-    // Inkludera HTML-komponenter
+    // Funktion för att inkludera HTML-komponenter
     function includeHTML() {
         var z, i, elmnt, file, xhttp;
         z = document.getElementsByTagName("*");
@@ -526,7 +567,7 @@ form button:hover::after {
                         if (this.status == 200) {elmnt.innerHTML = this.responseText;}
                         if (this.status == 404) {elmnt.innerHTML = "Page not found.";}
                         elmnt.removeAttribute("include-html");
-                        includeHTML(); // Fortsätt processen
+                        includeHTML();
                     }
                 }
                 xhttp.open("GET", file, true);
@@ -537,33 +578,4 @@ form button:hover::after {
     }
     </script>
 </body>
-<script>
-// Patch the fetch call in contact.js if it exists here for demonstration, otherwise ensure in assets/js/contact.js
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('contact-form');
-    if (form) {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-            fetch('http://localhost:5001/api/contact', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ name, email, message }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                alert('Meddelande skickat!');
-                form.reset();
-            })
-            .catch(error => {
-                alert('Något gick fel, försök igen senare.');
-            });
-        });
-    }
-});
-</script>
 </html>
