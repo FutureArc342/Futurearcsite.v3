@@ -61,14 +61,14 @@ app.post('/api/mail/sendmail', async (req, res) => {
       });
 
       const mailToAdmin = {
-        from: process.env.EMAIL_USER,
+        from: 'info@futurearc.se',
         to: 'futurearc451@gmail.com',
         subject: 'Nytt meddelande från kontaktformulär',
         text: `Namn: ${name}\nEmail: ${email}\nMeddelande: ${message}`
       };
 
       const mailToUser = {
-        from: process.env.EMAIL_USER,
+        from: 'info@futurearc.se',
         to: email,
         subject: 'Tack för ditt meddelande!',
         text: `Hej ${name},\n\nTack för att du kontaktade Futurearc. Vi återkommer till dig så snart som möjligt.\n\nDitt meddelande:\n"${message}"`
