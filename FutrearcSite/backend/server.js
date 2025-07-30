@@ -1,70 +1,73 @@
 const express = require('express');
 const cors = require('cors');
-const mongoose = require('mongoose');
 require('dotenv').config();
+const nodemailer = require('nodemailer');
 console.log("🛠 Server.js startar...");
 
-const nodemailer = require('nodemailer');
-const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: parseInt(process.env.SMTP_PORT, 10),
-  secure: process.env.SMTP_SECURE === 'true',
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS
-  }
-});
-transporter.verify((error, success) => {
-  if (error) {
-    console.error("❌ SMTP-konfigurationsfel:", error);
-  } else {
-    console.log("📬 SMTP-anslutning klar");
-  }
-});
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
+const { createClient } = require('@supabase/supabase-js');
 
-// Importera din modell
-const Contact = require('./models/contactModel');
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_KEY
+);
 
 const app = express();
 const PORT = process.env.PORT || 5001;
 
 app.use(express.json());
-app.use(cors({ origin: 'http://127.0.0.1:5500' }));
-
-// Anslut till MongoDB
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
-.then(() => console.log("✅ MongoDB connected"))
-.catch(err => console.error("❌ MongoDB error:", err));
+app.use(cors({
+  origin: 'http://127.0.0.1:5500',
+  methods: ['POST'],
+  allowedHeaders: ['Content-Type']
+}));
 
 // Route
 app.post('/api/mail/sendmail', async (req, res) => {
   try {
     const { name, email, message } = req.body;
+    console.log('📩 Inkommande meddelande:', { name, email, message });
+    const { data, error } = await supabase
+      .from('contact_messages')
+      .insert([{ name, email, message }]);
 
-    const newMessage = new Contact({ name, email, message });
-    await newMessage.save();
+    if (error) {
+      console.error("❌ Supabase error:", error);
+      return res.status(500).json({ message: "Serverfel vid lagring." });
+    }
 
-    // Notify site owner
-    await transporter.sendMail({
-      from: process.env.SMTP_USER,
-      to: ADMIN_EMAIL,
-      subject: `Nytt meddelande från ${name}`,
-      text: `Du har mottagit ett nytt meddelande:\n\nNamn: ${name}\nE-post: ${email}\nMeddelande:\n${message}`
+    // Konfigurera Nodemailer
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
     });
 
-    // Confirmation to user
-    await transporter.sendMail({
-      from: process.env.SMTP_USER,
+    const mailToAdmin = {
+      from: process.env.EMAIL_USER,
+      to: 'futurearc451@gmail.com',
+      subject: 'Nytt meddelande från kontaktformulär',
+      text: `Namn: ${name}\nEmail: ${email}\nMeddelande: ${message}`
+    };
+
+    const mailToUser = {
+      from: process.env.EMAIL_USER,
       to: email,
-      subject: 'Tack för ditt meddelande',
-      text: `Hej ${name},\n\nTack för att du kontaktade oss. Vi återkommer till dig snart!\n\nVänliga hälsningar,\nFutureArc-teamet`
-    });
+      subject: 'Tack för ditt meddelande!',
+      text: `Hej ${name},\n\nTack för att du kontaktade Futurearc. Vi återkommer till dig så snart som möjligt.\n\nDitt meddelande:\n"${message}"`
+    };
 
-    console.log("✅ Meddelande sparat:", newMessage);
+    try {
+      await transporter.sendMail(mailToAdmin);
+      await transporter.sendMail(mailToUser);
+      console.log("📧 E-post skickat!");
+    } catch (emailError) {
+      console.error("❌ Fel vid e-postskickning:", emailError);
+      return res.status(500).json({ message: "Meddelande sparades men e-post kunde inte skickas." });
+    }
+
+    console.log("✅ Meddelande sparat i Supabase:", JSON.stringify(data, null, 2));
     res.status(200).json({ message: "Meddelandet mottaget och sparat!" });
   } catch (error) {
     console.error("❌ Fel vid sparning:", error);

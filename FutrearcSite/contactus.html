@@ -408,174 +408,152 @@ form button:hover {
 }
     </style>
 
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        
-        // --- ALLMÄNNA FUNKTIONER ---
-        
-        // Ladda include-html komponenter (Header/Footer)
-        includeHTML();
-        
-        // Hantera FAQ accordion
-        const faqQuestions = document.querySelectorAll('.faq-question');
-        faqQuestions.forEach(question => {
-            question.addEventListener('click', function() {
-                const faqItem = this.parentElement;
-                faqItem.classList.toggle('active');
-                
-                // Stäng andra öppna items för en "accordion"-effekt
-                document.querySelectorAll('.faq-item.active').forEach(openItem => {
-                    if (openItem !== faqItem) {
-                        openItem.classList.remove('active');
-                    }
-                });
+</body>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Ladda include-html komponenter (Header/Footer)
+    includeHTML();
+
+    // Hantera FAQ accordion
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    faqQuestions.forEach(question => {
+        question.addEventListener('click', function() {
+            const faqItem = this.parentElement;
+            faqItem.classList.toggle('active');
+            // Stäng andra öppna items för en "accordion"-effekt
+            document.querySelectorAll('.faq-item.active').forEach(openItem => {
+                if (openItem !== faqItem) {
+                    openItem.classList.remove('active');
+                }
             });
         });
+    });
 
-        // --- ANIMERAD PLATSHÅLLARE FÖR FORMULÄR ---
+    // --- ANIMERAD PLATSHÅLLARE FÖR FORMULÄR ---
+    const placeholderTexts = {
+        name: 'T.ex. Ada Lovelace',
+        email: 'ada.lovelace@example.com',
+        message: 'Hej, jag är intresserad av era kurser...'
+    };
+    const animationStates = {};
 
-        const placeholderTexts = {
-            name: 'T.ex. Ada Lovelace',
-            email: 'ada.lovelace@example.com',
-            message: 'Hej, jag är intresserad av era kurser...'
-        };
-        
-        const animationStates = {};
-
-        function typeAnimation(element, text) {
-            let i = 0;
-            let isDeleting = false;
-            
-            // Rensa eventuell gammal animation för detta element
-            if (animationStates[element.id]) {
-                clearInterval(animationStates[element.id]);
-            }
-
-            const typingInterval = setInterval(() => {
-                if (isDeleting) {
-                    element.placeholder = text.substring(0, i - 1);
-                    i--;
-                    if (i === 0) {
-                        isDeleting = false;
-                        // Paus innan den börjar skriva igen
-                        clearInterval(typingInterval);
-                        setTimeout(() => typeAnimation(element, text), 2000);
-                    }
-                } else {
-                    element.placeholder = text.substring(0, i + 1);
-                    i++;
-                    if (i > text.length) {
-                        isDeleting = true;
-                        // Paus när texten är fullt utskriven
-                        clearInterval(typingInterval);
-                        setTimeout(() => typeAnimation(element, text), 3000);
-                    }
-                }
-            }, isDeleting ? 50 : 100);
-
-            animationStates[element.id] = typingInterval;
+    function typeAnimation(element, text) {
+        let i = 0;
+        let isDeleting = false;
+        // Rensa eventuell gammal animation för detta element
+        if (animationStates[element.id]) {
+            clearInterval(animationStates[element.id]);
         }
-
-        function stopAnimation(element) {
-            if (animationStates[element.id]) {
-                clearInterval(animationStates[element.id]);
-                delete animationStates[element.id];
-            }
-            element.placeholder = ''; // Rensa platshållare när användaren klickar
-        }
-
-        Object.keys(placeholderTexts).forEach(id => {
-            const inputElement = document.getElementById(id);
-            if (inputElement) {
-                // Starta animationen
-                typeAnimation(inputElement, placeholderTexts[id]);
-
-                // Stoppa animationen vid fokus
-                inputElement.addEventListener('focus', () => stopAnimation(inputElement));
-
-                // Starta igen om fältet lämnas tomt
-                inputElement.addEventListener('blur', () => {
-                    if (inputElement.value === '') {
-                        typeAnimation(inputElement, placeholderTexts[id]);
-                    }
-                });
-            }
-        });
-
-        // --- FORMULÄR-SUBMISSION ---
-        const form = document.getElementById('contact-form');
-        const feedbackElement = document.getElementById('form-feedback');
-
-        if (form) {
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const name = document.getElementById('name').value;
-                const email = document.getElementById('email').value;
-                const message = document.getElementById('message').value;
-
-                if (!name || !email || !message) {
-                    feedbackElement.textContent = 'Vänligen fyll i alla fält.';
-                    feedbackElement.className = 'error';
-                    return;
+        const typingInterval = setInterval(() => {
+            if (isDeleting) {
+                element.placeholder = text.substring(0, i - 1);
+                i--;
+                if (i === 0) {
+                    isDeleting = false;
+                    clearInterval(typingInterval);
+                    setTimeout(() => typeAnimation(element, text), 2000);
                 }
-                
-                feedbackElement.textContent = 'Skickar...';
-                feedbackElement.className = 'success'; // Använder success-stilen för "skickar"
-                
-                fetch('http://localhost:5001/api/contact', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name, email, message }),
-                })
-                .then(response => {
-                    if (!response.ok) throw new Error('Network response was not ok');
-                    return response.json();
-                })
-                .then(data => {
-                    feedbackElement.textContent = 'Tack! Ditt meddelande har skickats.';
-                    feedbackElement.className = 'success';
-                    form.reset();
-                    // Starta om animationerna för tomma fält efter reset
-                    Object.keys(placeholderTexts).forEach(id => {
-                        const inputElement = document.getElementById(id);
-                        if(inputElement.value === '') {
-                           typeAnimation(inputElement, placeholderTexts[id]);
-                        }
-                    });
-                })
-                .catch(error => {
-                    console.error('Fetch Error:', error);
-                    feedbackElement.textContent = 'Något gick fel, försök igen senare.';
-                    feedbackElement.className = 'error';
-                });
+            } else {
+                element.placeholder = text.substring(0, i + 1);
+                i++;
+                if (i > text.length) {
+                    isDeleting = true;
+                    clearInterval(typingInterval);
+                    setTimeout(() => typeAnimation(element, text), 3000);
+                }
+            }
+        }, isDeleting ? 50 : 100);
+        animationStates[element.id] = typingInterval;
+    }
+
+    function stopAnimation(element) {
+        if (animationStates[element.id]) {
+            clearInterval(animationStates[element.id]);
+            delete animationStates[element.id];
+        }
+        element.placeholder = '';
+    }
+
+    Object.keys(placeholderTexts).forEach(id => {
+        const inputElement = document.getElementById(id);
+        if (inputElement) {
+            typeAnimation(inputElement, placeholderTexts[id]);
+            inputElement.addEventListener('focus', () => stopAnimation(inputElement));
+            inputElement.addEventListener('blur', () => {
+                if (inputElement.value === '') {
+                    typeAnimation(inputElement, placeholderTexts[id]);
+                }
             });
         }
     });
 
-    // Funktion för att inkludera HTML-komponenter
-    function includeHTML() {
-        var z, i, elmnt, file, xhttp;
-        z = document.getElementsByTagName("*");
-        for (i = 0; i < z.length; i++) {
-            elmnt = z[i];
-            file = elmnt.getAttribute("include-html");
-            if (file) {
-                xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function() {
-                    if (this.readyState == 4) {
-                        if (this.status == 200) {elmnt.innerHTML = this.responseText;}
-                        if (this.status == 404) {elmnt.innerHTML = "Page not found.";}
-                        elmnt.removeAttribute("include-html");
-                        includeHTML();
-                    }
-                }
-                xhttp.open("GET", file, true);
-                xhttp.send();
+    // --- FORMULÄR-SUBMISSION ---
+    const form = document.getElementById('contact-form');
+    const feedbackElement = document.getElementById('form-feedback');
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            if (!name || !email || !message) {
+                feedbackElement.textContent = 'Vänligen fyll i alla fält.';
+                feedbackElement.className = 'error';
                 return;
             }
+            feedbackElement.textContent = 'Skickar...';
+            feedbackElement.className = 'success';
+            fetch('http://localhost:5002/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, email, message }),
+            })
+            .then(response => {
+                if (!response.ok) throw new Error('Network response was not ok');
+                return response.json();
+            })
+            .then(data => {
+                feedbackElement.textContent = 'Tack! Ditt meddelande har skickats.';
+                feedbackElement.className = 'success';
+                form.reset();
+                Object.keys(placeholderTexts).forEach(id => {
+                    const inputElement = document.getElementById(id);
+                    if(inputElement.value === '') {
+                        typeAnimation(inputElement, placeholderTexts[id]);
+                    }
+                });
+            })
+            .catch(error => {
+                console.error('Fetch Error:', error);
+                feedbackElement.textContent = 'Något gick fel, försök igen senare.';
+                feedbackElement.className = 'error';
+            });
+        });
+    }
+});
+
+// Funktion för att inkludera HTML-komponenter
+function includeHTML() {
+    var z, i, elmnt, file, xhttp;
+    z = document.getElementsByTagName("*");
+    for (i = 0; i < z.length; i++) {
+        elmnt = z[i];
+        file = elmnt.getAttribute("include-html");
+        if (file) {
+            xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4) {
+                    if (this.status == 200) {elmnt.innerHTML = this.responseText;}
+                    if (this.status == 404) {elmnt.innerHTML = "Page not found.";}
+                    elmnt.removeAttribute("include-html");
+                    includeHTML();
+                }
+            }
+            xhttp.open("GET", file, true);
+            xhttp.send();
+            return;
         }
     }
-    </script>
-</body>
+}
+</script>
 </html>

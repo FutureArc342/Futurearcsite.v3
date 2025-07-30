@@ -1,6 +1,6 @@
+const { supabase } = require('../supabaseClient');
 const express = require('express');
 const router = express.Router();
-const ContactMessage = require('../models/contactModel');
 const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
@@ -13,11 +13,19 @@ const transporter = nodemailer.createTransport({
 
 router.post('/', async (req, res) => {
   const { name, email, message } = req.body;
+  console.log("Received values:", { name, email, message });
+
+  if (!name || !email || !message) {
+    return res.status(400).json({ message: 'Alla fält krävs.' });
+  }
 
   try {
-    // Save to MongoDB
-    const newMessage = new ContactMessage({ name, email, message });
-    await newMessage.save();
+    // Save to Supabase
+    const { error: dbError } = await supabase
+      .from('contact_messages') // se till att endast denna tabell används i Supabase
+      .insert([{ name, email, message }]);
+
+    if (dbError) throw dbError;
 
     // Send mail to admin
     await transporter.sendMail({
