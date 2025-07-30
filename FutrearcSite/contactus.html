@@ -77,7 +77,7 @@
                         <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
                     </div>
                     <div class="faq-answer">
-                        <p>Future Arc är en community för tech-entusiaster och programmerare i Sverige. Här kommer du kunna nätverka, ta del av tech-nyheter, lära dig genom kurser och få hjälp från likasinnade.</p>
+                        <p>Future Arc är en community för tech-entusiaster och programmerare i Sverige. Här kommer du kunna nätverk, ta del av tech-nyheter, lära dig genom kurser och få hjälp från likasinnade.</p>
                     </div>
                 </div>
                 
@@ -487,14 +487,15 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    const API_URL = 'http://127.0.0.1:5002'; // Define API URL
     // --- FORMULÄR-SUBMISSION ---
     const form = document.getElementById('contact-form');
     const feedbackElement = document.getElementById('form-feedback');
     if (form) {
         form.addEventListener('submit', function(e) {
             e.preventDefault();
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
             const message = document.getElementById('message').value;
             if (!name || !email || !message) {
                 feedbackElement.textContent = 'Vänligen fyll i alla fält.';
@@ -503,7 +504,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             feedbackElement.textContent = 'Skickar...';
             feedbackElement.className = 'success';
-            fetch('http://localhost:5002/api/contact', {
+            fetch(`${API_URL}/api/mail/sendmail`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name, email, message }),
@@ -513,15 +514,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 return response.json();
             })
             .then(data => {
-                feedbackElement.textContent = 'Tack! Ditt meddelande har skickats.';
-                feedbackElement.className = 'success';
-                form.reset();
-                Object.keys(placeholderTexts).forEach(id => {
-                    const inputElement = document.getElementById(id);
-                    if(inputElement.value === '') {
-                        typeAnimation(inputElement, placeholderTexts[id]);
-                    }
-                });
+                if (data.ok) {
+                    feedbackElement.textContent = data.message;
+                    feedbackElement.className = 'success';
+                    form.reset();
+                    Object.keys(placeholderTexts).forEach(id => {
+                        const inputElement = document.getElementById(id);
+                        if(inputElement.value === '') {
+                            typeAnimation(inputElement, placeholderTexts[id]);
+                        }
+                    });
+                } else {
+                    feedbackElement.textContent = data.error || 'Något gick fel, försök igen senare.';
+                    feedbackElement.className = 'error';
+                }
             })
             .catch(error => {
                 console.error('Fetch Error:', error);
