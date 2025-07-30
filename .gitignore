@@ -30,3 +30,5 @@ coverage/
 # Ignorera temporära filer
 *.tmp
 *.temp
+
+backend/node_modules
