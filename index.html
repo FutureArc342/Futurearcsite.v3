@@ -4,95 +4,216 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Futurearc.se - Kommer snart</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --primary-color: #ffffff;
+      --secondary-color: #a9a9a9;
+      --background-color: #000000;
+      --box-background: rgba(255, 255, 255, 0.05);
+      --accent-color: #00aaff;
+      --glow-color: #f25c05; /* Din orangea färg */
+    }
+
     body {
-      background: #0a0a0a;
-      color: #ffffff;
+      background: var(--background-color);
+      color: var(--primary-color);
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      font-family: Arial, sans-serif;
+      min-height: 100vh;
+      font-family: 'Poppins', sans-serif;
       text-align: center;
-      margin: 0; /* Ensures no default body margin */
+      margin: 0;
+      padding: 20px;
+      box-sizing: border-box;
+      background-image: url('assets/images/banner.png'), radial-gradient(circle, #1a1a1a 1px, transparent 1px);
+      background-size: cover, 20px 20px;
+      background-position: center, 0 0;
+      background-repeat: no-repeat, repeat;
+      animation: fadeIn 1.5s ease-in-out;
     }
+
+    .container {
+      max-width: 800px;
+      width: 100%;
+    }
+    
+    /* --- NYTT FÖR VIDEO --- */
+    .video-container {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%; /* 16:9 aspect ratio */
+      margin-bottom: 2rem;
+      border-radius: 12px;
+      /* Den orangea skuggan/glöden */
+      box-shadow: 0 0 15px 5px var(--glow-color), 0 0 30px 10px rgba(242, 92, 5, 0.5);
+    }
+    
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 12px; /* Matchar containerns rundning */
+    }
+    /* --- SLUT PÅ NYTT FÖR VIDEO --- */
+
     h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      letter-spacing: 2px;
     }
+
     p {
-      font-size: 1.2rem;
+      font-size: clamp(1rem, 3vw, 1.25rem);
+      font-weight: 300;
+      color: var(--secondary-color);
+      margin-bottom: 3rem;
     }
+
     .countdown {
       display: flex;
-      gap: 10px;
-      margin-top: 20px;
-      font-size: 1.5rem;
+      gap: 20px;
+      justify-content: center;
+      font-weight: 300;
     }
-    .countdown div {
-      background: rgba(255,255,255,0.1);
-      padding: 10px 15px;
-      border-radius: 8px;
+
+    .countdown-unit {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .countdown-unit span {
+      font-size: clamp(2rem, 10vw, 4rem);
+      font-weight: 600;
+      line-height: 1;
+      color: var(--primary-color);
+    }
+    
+    .countdown-unit .label {
+      font-size: clamp(0.75rem, 2.5vw, 1rem);
+      text-transform: uppercase;
+      color: var(--secondary-color);
+      letter-spacing: 1px;
+      margin-top: 10px;
+    }
+
+    .launched-message {
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--accent-color);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .highlight-underline {
+    position: relative;
+    display: inline-block;
+    font-weight: 600;
+    color: var(--primary-color);
+  }
+    .highlight-underline::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 100%;
+      height: 4px;
+      background: var(--glow-color);
+      border-radius: 2px;
+      opacity: 0.8;
+    }
+    .orange-seconds {
+    color: var(--glow-color) !important;
+    font-weight: 600;
+    text-shadow: 0 0 8px var(--glow-color);
     }
   </style>
 </head>
 <body>
-  <h1>Futurearc.se</h1>
-  <p>Vi jobbar på något stort. Håll utkik – lansering snart!</p>
 
-  <div class="countdown">
-    <div><span id="days">0</span> dagar</div>
-    <div><span id="hours">0</span> h</div>
-    <div><span id="minutes">0</span> min</div>
-    <div><span id="seconds">0</span> sek</div>
+  <div class="container">
+    
+    <div class="video-container">
+      <iframe 
+        src="assets/videos/intro.mp4" 
+        title="Intro Video" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+      </iframe>
+    </div>
+    <h1>Futurearc.se</h1>
+    <p>Vi jobbar på något stort. Håll utkik  <span class="highlight-underline">lansering snart!</span></p>
+  
+    <div class="countdown">
+      <div class="countdown-unit">
+        <span id="days">0</span>
+        <div class="label">Dagar</div>
+      </div>
+      <div class="countdown-unit">
+        <span id="hours">0</span>
+        <div class="label">Timmar</div>
+      </div>
+      <div class="countdown-unit">
+        <span id="minutes">0</span>
+        <div class="label">Minuter</div>
+      </div>
+      <div class="countdown-unit">
+        <span id="seconds" class="orange-seconds">0</span>
+        <div class="label orange-seconds">Sekunder</div>
+      </div>
+    </div>
   </div>
 
   <script>
     // Set the launch date to August 4, 2025, at 00:00:00
     const launchDate = new Date("Aug 4, 2025 00:00:00").getTime();
     
-    // Get references to the HTML elements for displaying time units
     const daysEl = document.getElementById("days");
     const hoursEl = document.getElementById("hours");
     const minutesEl = document.getElementById("minutes");
     const secondsEl = document.getElementById("seconds");
 
-    /**
-     * Updates the countdown timer every second.
-     * Calculates the remaining time until the launch date and updates the display.
-     */
     function updateCountdown() {
-      // Get the current time
       const now = new Date().getTime();
-      // Calculate the distance (difference) between the launch date and now
       const distance = launchDate - now;
 
-      // If the launch date has passed, display a message and stop
       if (distance < 0) {
-        document.querySelector(".countdown").innerHTML = "Vi har lanserat!";
-        // Optionally, clear the interval if the countdown is over
+        document.querySelector(".countdown").innerHTML = "<div class='launched-message'>Vi har lanserat!</div>";
         clearInterval(countdownInterval); 
         return;
       }
 
-      // Calculate time units
       const days = Math.floor(distance / (1000 * 60 * 60 * 24));
       const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      // Update the HTML elements with the calculated values
       daysEl.textContent = days;
       hoursEl.textContent = hours;
       minutesEl.textContent = minutes;
       secondsEl.textContent = seconds;
     }
 
-    // Call updateCountdown immediately to avoid initial delay
-    updateCountdown();
-    // Update the countdown every 1 second (1000 milliseconds)
     const countdownInterval = setInterval(updateCountdown, 1000);
+    updateCountdown(); // Call immediately
   </script>
 </body>
 </html>
